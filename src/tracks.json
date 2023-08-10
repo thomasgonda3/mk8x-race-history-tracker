@@ -1,0 +1,442 @@
+{
+  "MKS": {
+    "fullName": "Mario Kart Stadium",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "WP": {
+    "fullName": "Water Park",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "SSC": {
+    "fullName": "Sweet Sweet Canyon",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "TR": {
+    "fullName": "Thwomp Ruins",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "MC": {
+    "fullName": "Mario Circuit",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "TH": {
+    "fullName": "Toad Harbor",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "TM": {
+    "fullName": "Twisted Mansion",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "SGF": {
+    "fullName": "Shy Guy Falls",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "SA": {
+    "fullName": "Sunshine Airport",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "DS": {
+    "fullName": "Dolphin Shoals",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "Ed": {
+    "fullName": "Electrodrome",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "MW": {
+    "fullName": "Mount Wario",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "CC": {
+    "fullName": "Cloudtop Cruise",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "BDD": {
+    "fullName": "Bone-Dry Dunes",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "BC": {
+    "fullName": "Bowser's Castle",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "RR": {
+    "fullName": "Rainbow Road",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "rMMM": {
+    "fullName": "Wii Moo Moo Meadows",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "rMC": {
+    "fullName": "GBA Mario Circuit",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "rCCB": {
+    "fullName": "DS Cheep Cheep Beach",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "rTT": {
+    "fullName": "N64 Toad's Turnpike",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "rDDD": {
+    "fullName": "GCN Dry Dry Desert",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "rDP3": {
+    "fullName": "SNES Donut Plains 3",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "rRRy": {
+    "fullName": "N64 Royal Raceway",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "rDKJ": {
+    "fullName": "3DS DK Jungle",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "rWS": {
+    "fullName": "DS Wario Stadium",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "rSL": {
+    "fullName": "GCN Sherbet Land",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "rMP": {
+    "fullName": "3DS Music Park",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "rYV": {
+    "fullName": "N64 Yoshi Valley",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "rTTC": {
+    "fullName": "DS Tick-Tock Clock",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "rPPS": {
+    "fullName": "3DS Piranha Plant Slide",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "rGV": {
+    "fullName": "Wii Grumble Volcano",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "rRRd": {
+    "fullName": "N64 Rainbow Road",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "dYC": {
+    "fullName": "GCN Yoshi Circuit",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "dEA": {
+    "fullName": "Excitebike Arena",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "dDD": {
+    "fullName": "Dragon Driftway",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "dMC": {
+    "fullName": "Mute City",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "dWGM": {
+    "fullName": "Wii Wario's Gold Mine",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "dRR": {
+    "fullName": "SNES Rainbow Road",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "dIIO": {
+    "fullName": "Ice Ice Outpost",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "dHC": {
+    "fullName": "Hyrule Circuit",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "dBP": {
+    "fullName": "GCN Baby Park",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "dCL": {
+    "fullName": "GBA Cheese Land",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "dWW": {
+    "fullName": "Wild Woods",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "dAC": {
+    "fullName": "Animal Crossing",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "dNBC": {
+    "fullName": "3DS Neo Bowser City",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "dRiR": {
+    "fullName": "GBA Ribbon Road",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "dSBS": {
+    "fullName": "Super Bell Subway",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "dBB": {
+    "fullName": "Big Blue",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bPP": {
+    "fullName": "Tour Paris Promenade",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bTC": {
+    "fullName": "3DS Toad Circuit",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bCMo": {
+    "fullName": "N64 Choco Mountain",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bCMa": {
+    "fullName": "Wii Coconut Mall",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bTB": {
+    "fullName": "Tour Tokyo Blur",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bSR": {
+    "fullName": "DS Shroom Ridge",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bSG": {
+    "fullName": "GBA Sky Garden",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bNH": {
+    "fullName": "Tour Ninja Hideaway",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bNYM": {
+    "fullName": "Tour New York Minute",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bMC3": {
+    "fullName": "SNES Mario Circuit 3",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bKD": {
+    "fullName": "N64 Kalimari Desert",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bWP": {
+    "fullName": "DS Waluigi Pinball",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bSS": {
+    "fullName": "Tour Sydney Sprint",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bSL": {
+    "fullName": "GBA Snow Land",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bMG": {
+    "fullName": "Wii Mushroom Gorge",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bSHS": {
+    "fullName": "Sky-High Sundae",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bLL": {
+    "fullName": "Tour London Loop",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bBL": {
+    "fullName": "GBA Boo Lake",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bRRM": {
+    "fullName": "3DS Rock Rock Mountain",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bMT": {
+    "fullName": "Wii Maple Treeway",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bBB": {
+    "fullName": "Tour Berlin Byways",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bPG": {
+    "fullName": "DS Peach Gardens",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bMM": {
+    "fullName": "Tour Merry Mountain",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bRR7": {
+    "fullName": "3DS Rainbow Road",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bAD": {
+    "fullName": "Tour Amsterdam Drift",    
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bRP": {
+    "fullName": "GBA Riverside Park",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bDKS": {
+    "fullName": "Wii DK Summit",  
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bYI": {
+    "fullName": "Yoshi's Island",    
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bBR": {
+    "fullName": "Tour Bangkok Rush",    
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bMC": {
+    "fullName": "DS Mario Circuit",    
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bWS": {
+    "fullName": "GCN Waluigi Stadium",    
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bSSy": {
+    "fullName": "Tour Singapore Speedway",    
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bAtD": {
+    "fullName": "Tour Athens Dash",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bDC": {
+    "fullName": "GCN Daisy Cruiser",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bMH": {
+    "fullName": "Wii Moonview Highway",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bSCS": {
+    "fullName": "Squeaky Clean Sprint",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bLAL": {
+    "fullName": "Tour Los Angeles Laps",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bSW": {
+    "fullName": "GBA Sunset Wilds",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bKC": {
+    "fullName": "Wii Koopa Cape",
+    "races": 0,
+    "avgFinish": 0
+  },
+  "bVV": {
+    "fullName": "Tour Vancouver Velocity",
+    "races": 0,
+    "avgFinish": 0
+  }
+}
