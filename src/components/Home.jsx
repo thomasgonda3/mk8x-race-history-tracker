@@ -11,7 +11,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchPlayers = async () => {
-      let request = `http://${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/api/players`;
+      let request = "/api/players";
       let parameters = "?";
       parameters =
         playerName.length === 0

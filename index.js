@@ -9,6 +9,8 @@ const dbName = isProduction
   ? process.env.DATABASE_NAME
   : process.env.TEST_DATABASE_NAME;
 
+const PORT = process.env.API_PORT;
+
 const config = {
   user: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
@@ -99,13 +101,9 @@ const api = async () => {
     res.sendFile(path.join(dirname, "build", "index.html"));
   });
 
-  app.listen(
-    process.env.REACT_APP_API_PORT,
-    process.env.REACT_APP_API_HOST,
-    () => {
-      console.log(`Server started on Port ${process.env.REACT_APP_API_PORT}`);
-    }
-  );
+  app.listen(PORT, () => {
+    console.log(`Server started on Port ${PORT}`);
+  });
 };
 
 api().catch((e) => console.log(e));

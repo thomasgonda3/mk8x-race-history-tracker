@@ -23,7 +23,7 @@ const Player = () => {
 
   useEffect(() => {
     const fetchRaces = async () => {
-      let request = `http://${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/api/races?playerID=${params.playerID}`;
+      let request = `/api/races?playerID=${params.playerID}`;
       const response = await fetch(request, {
         method: "GET",
       });
