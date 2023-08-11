@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
-import images from "../images/index";
+import images from "../images/track_images/index";
 
-import * as tracks from "../tracks.json";
+import * as tracks from "../json/tracks.json";
 
 const rankingMap = [
   "1st",
@@ -28,7 +28,6 @@ const options = Object.entries(tracks.default).map((track) => {
   );
 });
 
-// Filter by Specific Track
 const RaceHistory = (props) => {
   const [track, setTrack] = useState("All");
 

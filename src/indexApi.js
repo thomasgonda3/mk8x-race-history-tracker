@@ -13,6 +13,7 @@ const config = {
   password: process.env.DATABASE_PASSWORD,
   database: dbName,
   server: process.env.DATABASE_SERVER,
+  timeout: 10000000,
   pool: {
     max: 1000,
     min: 0,
@@ -39,6 +40,7 @@ const api = async () => {
 
   app.get(`/api/players`, async (req, res) => {
     const { page = 0, pageAmount = 50, playerName = "" } = req.query;
+    const countString = "[Overall_Count] = COUNT(*) OVER()";
     const patternSearch =
       playerName === "" ? "" : `WHERE [Name] LIKE '%${playerName}%'`;
     try {
@@ -48,7 +50,7 @@ const api = async () => {
             ,[Name]
             ,[Race_Total]
             ,[Most_Recent_Race]
-            ,[Overall_Count] = COUNT(*) OVER()
+
         FROM [${dbName}].[dbo].[Players]
         ${patternSearch}
         ORDER BY [Most_Recent_Race] DESC

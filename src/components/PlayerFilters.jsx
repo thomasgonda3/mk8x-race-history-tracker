@@ -45,8 +45,9 @@ const PlayerFilters = ({
           <Form.Select onChange={(e) => setMode(e.target.value)}>
             <option value="All">All Races</option>
             <option value="Mogi">Mogi</option>
+            <option value="Tournament">Tournament</option>
             <option value="War">War</option>
-            <option value="WW">Worldwides</option>
+            <option value="Casual">Casual</option>
           </Form.Select>
         </div>
       </div>

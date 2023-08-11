@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table";
 
 import RaceStatsBody from "./RaceStatsBody";
 
-import * as tracks from "../tracks.json";
+import * as tracks from "../json/tracks.json";
 
 const RaceStats = (props) => {
   const [raceData, setRaceData] = useState([]);
