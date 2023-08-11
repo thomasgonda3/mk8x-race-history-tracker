@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import sql from "mssql";
+import path from "path";
 import "dotenv/config";
 
 const isProduction = false;
@@ -27,10 +28,14 @@ const config = {
   },
 };
 
+const dirname = path.resolve();
+
 const api = async () => {
   sql.connect(config);
 
   const app = express();
+
+  app.use(express.static(path.join(dirname, "build")));
 
   app.use(cors());
   app.use((req, res, next) => {
@@ -88,6 +93,10 @@ const api = async () => {
     } catch (e) {
       console.log(e);
     }
+  });
+
+  app.get(`*`, async (req, res) => {
+    res.sendFile(path.join(dirname, "build", "index.html"));
   });
 
   app.listen(
