@@ -34,7 +34,6 @@ const PlayerFilters = ({
               style={{ padding: "4px 11px 4px" }}
               value={[minDate, maxDate]}
               onChange={(dates) => {
-                console.log(dates);
                 setMinDate(dates[0]);
                 setMaxDate(dates[1]);
               }}
@@ -42,11 +41,16 @@ const PlayerFilters = ({
           </ConfigProvider>
         </div>
         <div className="col-5">
-          <Form.Select onChange={(e) => setMode(e.target.value)}>
+          <Form.Select
+            defaultValue="MogiTournamentWar"
+            onChange={(e) => setMode(e.target.value)}
+          >
             <option value="All">All Races</option>
             <option value="Mogi">Mogi</option>
             <option value="Tournament">Tournament</option>
             <option value="War">War</option>
+            <option value="MogiTournament">Mogi + Tournament</option>
+            <option value="MogiTournamentWar">Mogi + Tournament + War</option>
             <option value="Casual">Casual</option>
           </Form.Select>
         </div>

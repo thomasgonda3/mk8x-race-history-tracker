@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
 
+const isProduction = process.env.REACT_APP_IS_PRODUCTION;
+
 const Home = () => {
   const [players, setPlayers] = useState([]);
   const [playerName, setPlayerName] = useState("");
@@ -17,7 +19,10 @@ const Home = () => {
         playerName.length === 0
           ? parameters
           : parameters + `playerName=${playerName}`;
-      const response = await fetch(request + parameters, {
+      const url = isProduction
+        ? request + parameters
+        : "http://localhost:8000" + request + parameters;
+      const response = await fetch(url, {
         method: "GET",
       });
       const result = await response.json();
@@ -56,7 +61,7 @@ const Home = () => {
                 onClick={() => navigate(`/player/${player.ID}`)}
                 role="button"
               >
-                <td>{player.Name}</td>
+                <td>{player.Name || player.Discord_Name}</td>
                 <td>{player.Race_Total}</td>
                 <td>{player.Most_Recent_Race}</td>
               </tr>

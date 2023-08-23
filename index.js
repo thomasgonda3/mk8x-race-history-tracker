@@ -4,7 +4,7 @@ import sql from "mssql";
 import path from "path";
 import "dotenv/config";
 
-const isProduction = false;
+const isProduction = process.env.REACT_APP_IS_PRODUCTION;
 const dbName = isProduction
   ? process.env.DATABASE_NAME
   : process.env.TEST_DATABASE_NAME;
@@ -55,6 +55,7 @@ const api = async () => {
         SELECT 
             [ID]
             ,[Name]
+            ,[Discord_Name]
             ,[Race_Total]
             ,[Most_Recent_Race]
 
@@ -83,9 +84,7 @@ const api = async () => {
             ,[Result]
             ,[Date]
 			      ,[Name]
-			      ,[LoungePlayerID]
 			      ,[Team]
-			      ,[MKCID]
         FROM [${dbName}].[dbo].[Races]
 		    JOIN [${dbName}].[dbo].[Players]
 		    ON [${dbName}].[dbo].[Races].[PlayerID] = [${dbName}].[dbo].[Players].[ID]

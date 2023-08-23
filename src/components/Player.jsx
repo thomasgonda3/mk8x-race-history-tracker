@@ -10,10 +10,12 @@ import RaceStats from "./RaceStats";
 import RaceHistory from "./RaceHistory";
 import PlayerFilters from "./PlayerFilters";
 
+const isProduction = process.env.REACT_APP_IS_PRODUCTION;
+
 const Player = () => {
   const [races, setRaces] = useState([]);
   const [playerData, setPlayerData] = useState({});
-  const [mode, setMode] = useState("All");
+  const [mode, setMode] = useState("MogiTournamentWar");
   const [minDate, setMinDate] = useState(
     dayjs(process.env.REACT_APP_START_DATE, "YYYY-MM-DD")
   );
@@ -24,6 +26,7 @@ const Player = () => {
   useEffect(() => {
     const fetchRaces = async () => {
       let request = `/api/races?playerID=${params.playerID}`;
+      if (!isProduction) request = "http://localhost:8000" + request;
       const response = await fetch(request, {
         method: "GET",
       });
@@ -31,9 +34,8 @@ const Player = () => {
       if (result.length > 0) {
         const player = {
           name: result[0].Name,
+          discord_name: result[0].Discord_Name,
           team: result[0].Team,
-          mkcID: result[0].MKCID,
-          loungeID: result[0].LoungeID,
         };
         setPlayerData(player);
       }
@@ -44,14 +46,17 @@ const Player = () => {
 
   const filteredRaces = races.filter(
     (race) =>
-      (mode === "All" || race.Mode === mode) &&
+      (mode === "All" || mode.includes(race.Mode)) &&
       minDate.isBefore(race.Date) &&
       maxDate.endOf("day").isAfter(race.Date)
   );
 
   return (
     <div>
-      <h1 className="text-center align-middle m-3">{playerData.name}</h1>
+      <h1 className="text-center align-middle m-3">
+        {playerData.team ? playerData.team + " " : ""}
+        {`${playerData.name || playerData.discord_name}`}
+      </h1>
       <PlayerFilters
         minDate={minDate}
         setMinDate={setMinDate}

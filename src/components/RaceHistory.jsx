@@ -67,6 +67,7 @@ const RaceHistory = (props) => {
                     src={images[race.Track]}
                     alt={tracks.default[race.Track].fullName}
                   ></img>
+                  <div>{`Race ID: ${race.ID}`}</div>
                 </td>
                 <td>{rankingMap[race.Result - 1]}</td>
                 <td>{race.Mode}</td>
