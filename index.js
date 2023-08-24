@@ -46,21 +46,29 @@ const api = async () => {
   });
 
   app.get(`/api/players`, async (req, res) => {
-    const { page = 0, pageAmount = 50, playerName = "" } = req.query;
+    const {
+      page = 0,
+      pageAmount = 50,
+      playerName = "",
+      playerID = 0,
+    } = req.query;
     const countString = "[Overall_Count] = COUNT(*) OVER()";
     const patternSearch =
       playerName === "" ? "" : `WHERE [Name] LIKE '%${playerName}%'`;
+    const IDSearch = playerID === 0 ? "" : `WHERE [ID] = ${playerID}`;
     try {
       const result = await sql.query(`
         SELECT 
             [ID]
             ,[Name]
             ,[Discord_Name]
+            ,[Team]
             ,[Race_Total]
             ,[Most_Recent_Race]
 
         FROM [${dbName}].[dbo].[Players]
         ${patternSearch}
+        ${IDSearch}
         ORDER BY [Most_Recent_Race] DESC
         OFFSET ${page * pageAmount} ROWS
         FETCH NEXT ${pageAmount} ROWS ONLY`);

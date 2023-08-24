@@ -31,13 +31,31 @@ const Player = () => {
         method: "GET",
       });
       const result = await response.json();
-      if (result.length > 0) {
+      if (result.length > 0 && result[0].Name != null) {
         const player = {
           name: result[0].Name,
           discord_name: result[0].Discord_Name,
           team: result[0].Team,
         };
         setPlayerData(player);
+      } else {
+        const fetchPlayers = async () => {
+          let request = `/api/players?playerID=${params.playerID}`;
+          const url = isProduction
+            ? request
+            : "http://localhost:8000" + request;
+          const response = await fetch(url, {
+            method: "GET",
+          });
+          const result = await response.json();
+          const player = {
+            name: result[0].Name,
+            discord_name: result[0].Discord_Name,
+            team: result[0].Team,
+          };
+          setPlayerData(player);
+        };
+        fetchPlayers();
       }
       setRaces(result);
     };
@@ -55,7 +73,7 @@ const Player = () => {
     <div>
       <h1 className="text-center align-middle m-3">
         {playerData.team ? playerData.team + " " : ""}
-        {`${playerData.name || playerData.discord_name}`}
+        {`${playerData.name || playerData.discord_name || ""}`}
       </h1>
       <PlayerFilters
         minDate={minDate}
