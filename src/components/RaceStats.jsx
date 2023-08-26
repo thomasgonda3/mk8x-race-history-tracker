@@ -5,33 +5,47 @@ import RaceStatsBody from "./RaceStatsBody";
 
 import * as tracks from "../json/tracks.json";
 
+const POINT_MAP = [15, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+const RACE_AVG = 6.83;
+
 const RaceStats = (props) => {
   const [raceData, setRaceData] = useState([]);
   const [overallAverage, setOverallAverage] = useState(0);
+  const [overallScore, setOverallScore] = useState(0);
 
   useEffect(() => {
     const tracksCopy = JSON.parse(JSON.stringify(tracks.default));
 
     let overallTrackAverage = 0;
+    let overallTrackScore = 0;
     for (const race of props.races) {
       tracksCopy[race.Track].races++;
       tracksCopy[race.Track].avgFinish += race.Result;
+      tracksCopy[race.Track].avgScore += POINT_MAP[race.Result - 1];
       overallTrackAverage += race.Result;
+      overallTrackScore += POINT_MAP[race.Result - 1];
     }
 
     setOverallAverage(
       props.races.length > 0 ? overallTrackAverage / props.races.length : 0
     );
 
+    setOverallScore(
+      props.races.length > 0 ? overallTrackScore / props.races.length : 0
+    );
+
     const trackMap = Object.entries(tracksCopy).map((course, index) => {
       const avgFinish =
         course[1].races === 0 ? 0 : course[1].avgFinish / course[1].races;
+      const avgScore =
+        course[1].races === 0 ? 0 : course[1].avgScore / course[1].races;
       return {
         ingameOrder: index + 1,
         abr: course[0],
         fullName: course[1].fullName,
         races: course[1].races,
         avgFinish,
+        avgScore,
       };
     });
 
@@ -48,6 +62,7 @@ const RaceStats = (props) => {
         raceData={raceData}
         setRaceData={setRaceData}
         overallAverage={overallAverage}
+        overallScore={overallScore}
       />
       <span className="fst-italic m-1">{props.races.length} results</span>
       <Table
@@ -59,21 +74,38 @@ const RaceStats = (props) => {
       >
         <thead>
           <tr>
+            <th>#</th>
             <th>Track</th>
             <th># of Races</th>
             <th>Average Finish</th>
+            <th>Average Score</th>
           </tr>
         </thead>
         <tbody>
           {raceData.map((race, index) => {
             return (
               <tr key={`table-row-${index + 1}`}>
+                <td>{index + 1}</td>
                 <td>{race.fullName}</td>
                 <td>{race.races}</td>
                 <td>
                   {race.avgFinish === 0
                     ? "-"
                     : Math.round(100 * race.avgFinish) / 100}
+                </td>
+                <td
+                  style={{
+                    color:
+                      race.avgScore === 0
+                        ? "black"
+                        : race.avgScore < RACE_AVG
+                        ? "red"
+                        : "green",
+                  }}
+                >
+                  {race.avgScore === 0
+                    ? "-"
+                    : Math.round(100 * race.avgScore) / 100}
                 </td>
               </tr>
             );
