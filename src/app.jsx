@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import Instructions from "./components/Instructions";
 import Player from "./components/Player";
+import VideoPage from "./components/VideoPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/instructions" element={<Instructions />} />
+            <Route path="/scan" element={<VideoPage />} />
             <Route path="/player/:playerID" element={<Player />} />
           </Routes>
         </Router>
