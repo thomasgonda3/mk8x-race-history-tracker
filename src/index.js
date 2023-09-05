@@ -5,10 +5,13 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import "dotenv/config";
 import "./index.css";
 import App from "./app";
+import { CookiesProvider } from "react-cookie";
 
 const root = createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <CookiesProvider defaultSetCookies={{ path: "/" }}>
+      <App />
+    </CookiesProvider>
   </React.StrictMode>
 );

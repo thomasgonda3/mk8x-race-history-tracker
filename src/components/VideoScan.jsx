@@ -4,25 +4,21 @@ import Image from "image-js";
 import pixelmatch from "pixelmatch";
 import u8intTracks from "../u8intarrays/tracks/index.js";
 import u8intPlacements from "../u8intarrays/placements/index.js";
+import { useCookies } from "react-cookie";
 
-const isProduction = true;
+const SLEEP_TIME = 1.6;
+const PIXEL_DIFF_TRACK_THRESHOLD = 2000;
+const PIXEL_DIFF_PLACEMENT_THRESHOLD = 1337;
 
-const SLEEP_TIME = 2.3;
-const PIXEL_DIFF_THRESHOLD = 2000;
-// for some reason usestate wont save a MediaStream object, and since
-// the analyzeImage function gets called every few seconds theres no need
-// to have it saved to a state to trigger a rerender, so this seems ok.
-let mediaObject = {};
-
-const VideoScan = ({ setTrackData }) => {
-  const [croppedImage, setCroppedImage] = useState({});
+const VideoScan = ({ setTrackData, trackDataRef, displayVideo }) => {
+  const [cookies, setCookie] = useCookies(["videoSource"]);
   const [deviceId, setDeviceId] = useState("");
   const [displaySources, setDisplaySources] = useState([]);
   const video = useRef(null);
-  const trackDataRef = useRef([]);
+  const mediaObject = useRef({});
 
   const analyzeImage = () => {
-    const track = mediaObject.getVideoTracks()[0];
+    const track = mediaObject.current.getVideoTracks()[0];
     const imageCapture = new ImageCapture(track);
 
     imageCapture.takePhoto().then((blob) => {
@@ -41,9 +37,6 @@ const VideoScan = ({ setTrackData }) => {
             })
             .rgba8();
 
-          let currTrack = "";
-          let pixelDiff = 0;
-          // console.time("match test");
           for (const u8intarray of u8intTracks) {
             const output = pixelmatch(
               rgbaImage.data,
@@ -55,23 +48,14 @@ const VideoScan = ({ setTrackData }) => {
                 threshold: 0.15,
               }
             );
-            if (output < PIXEL_DIFF_THRESHOLD) {
-              pixelDiff = output;
-              currTrack = u8intarray[0];
-              //   console.log("trackData", trackData);
-              //   console.log("ref", trackDataRef);
+            if (output < PIXEL_DIFF_TRACK_THRESHOLD) {
+              console.log(
+                `Current Track: ${u8intarray[0]}, pixelDiff: ${output}`
+              );
               trackDataRef.current.push([u8intarray[0], null, null]);
               setTrackData([...trackDataRef.current]);
             }
           }
-          // console.timeEnd("match test");
-          console.log(
-            currTrack !== ""
-              ? `Current Track: ${currTrack}, pixelDiff: ${pixelDiff}`
-              : `No match.`
-          );
-          const url = rgbaImage.toDataURL();
-          setCroppedImage(url);
         } else {
           const resized = image.resize({ width: 1920, height: 1080 });
           for (let i = 0; i < 12; i++) {
@@ -92,8 +76,8 @@ const VideoScan = ({ setTrackData }) => {
               62
             );
 
-            if (output < PIXEL_DIFF_THRESHOLD) {
-              console.log(`It's a match ${i + 1}`);
+            if (output < PIXEL_DIFF_PLACEMENT_THRESHOLD) {
+              console.log(`Found Position: ${i + 1}, pixelDiff: ${output}`);
               trackDataRef.current[trackDataRef.current.length - 1][1] = i + 1;
               trackDataRef.current[trackDataRef.current.length - 1][2] =
                 image.toDataURL();
@@ -108,29 +92,35 @@ const VideoScan = ({ setTrackData }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (mediaObject.constructor.name === "MediaStream") analyzeImage();
+      if (mediaObject.current.constructor.name === "MediaStream")
+        analyzeImage();
     }, SLEEP_TIME * 1000);
     return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
     async function getSources() {
-      navigator.mediaDevices
-        .getUserMedia({ audio: false, video: true })
-        .then(() => {
-          console.log("ask permission");
-        });
+      await navigator.mediaDevices.getUserMedia({ audio: false, video: true });
       navigator.mediaDevices
         .enumerateDevices()
         .then((devices) => {
-          console.log(devices);
-          const filteredDevices = devices.filter(
+          let filteredDevices = devices.filter(
             (device) => device.deviceId !== ""
           );
-          setDisplaySources(filteredDevices);
           if (filteredDevices.length > 0) {
+            let cookieDeviceIndex = filteredDevices.findIndex(
+              (source) => source.deviceId === cookies.videoSource
+            );
+            if (cookieDeviceIndex !== -1) {
+              const chosenDevice = filteredDevices[cookieDeviceIndex];
+              filteredDevices = filteredDevices.filter(
+                (device) => device.deviceId !== cookies.videoSource
+              );
+              filteredDevices.unshift(chosenDevice);
+            }
             setDeviceId(filteredDevices[0].deviceId);
           }
+          setDisplaySources(filteredDevices);
         })
         .catch((err) => {
           console.error(`${err.name}: ${err.message}`);
@@ -149,13 +139,13 @@ const VideoScan = ({ setTrackData }) => {
           },
         },
       });
-      mediaObject = mediaStream;
+      mediaObject.current = mediaStream;
       video.current.srcObject = mediaStream;
     }
-    if (displaySources.length !== 0) {
+    if (displaySources.length !== 0 && displayVideo === "show") {
       getMedia();
     }
-  }, [deviceId]);
+  }, [deviceId, displayVideo]);
 
   const videoSources = displaySources.map((source, index) => {
     return (
@@ -167,22 +157,38 @@ const VideoScan = ({ setTrackData }) => {
 
   return (
     <div className="m-3 text-center">
-      <video
-        className="m-2"
-        height="360px"
-        width="640px"
-        autoPlay="autoplay"
-        ref={video}
-      ></video>
+      <div className="pb-2">
+        {displayVideo === "show" ? (
+          <video
+            className="m-auto"
+            height="360px"
+            width="640px"
+            autoPlay="autoplay"
+            ref={video}
+          />
+        ) : (
+          <div>
+            <div
+              className="m-auto"
+              style={{
+                height: "360px",
+                width: "640px",
+                backgroundColor: "black",
+              }}
+            />
+            <div className="pb-2" />
+          </div>
+        )}
+      </div>
       <Form.Select
         className="m-auto w-75"
         onChange={(e) => {
+          setCookie("videoSource", e.target.value);
           return setDeviceId(e.target.value);
         }}
       >
         {videoSources}
       </Form.Select>
-      {isProduction ? <></> : <img src={croppedImage}></img>}
     </div>
   );
 };

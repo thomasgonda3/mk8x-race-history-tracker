@@ -1,8 +1,12 @@
 import express from "express";
 import cors from "cors";
+import bodyParser from "body-parser";
 import sql from "mssql";
 import path from "path";
 import "dotenv/config";
+
+import tracks from "./src/json/tracks.json" assert { type: "json" };
+const tracksArray = Object.keys(tracks);
 
 const isProduction = process.env.REACT_APP_IS_PRODUCTION;
 const dbName = isProduction
@@ -40,6 +44,8 @@ const api = async () => {
   app.use(express.static(path.join(dirname, "build")));
 
   app.use(cors());
+  const jsonParser = bodyParser.json();
+
   app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     next();
@@ -99,6 +105,90 @@ const api = async () => {
         WHERE [PlayerID] = ${playerID}
         ORDER BY [DATE] DESC`);
       res.json(result.recordset);
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  app.post(`/api/submit`, jsonParser, async (req, res) => {
+    try {
+      const { trackData = [], mode, apiKey } = req.body;
+
+      if (apiKey == null || typeof apiKey !== "string" || apiKey.length === 0) {
+        return res.status(400).json("Invalid API Key value.");
+      }
+
+      if (
+        !(
+          mode == "Casual" ||
+          mode === "Mogi" ||
+          mode === "War" ||
+          mode === "Tournament"
+        )
+      ) {
+        return res.status(400).json("Invalid Mode value.");
+      }
+
+      if (!Array.isArray(trackData) || trackData.length === 0) {
+        return res
+          .status(400)
+          .json(
+            "Invalid Track Data type; expecting array with length greater than 0."
+          );
+      }
+      for (const currTrack of trackData) {
+        if (tracksArray.indexOf(currTrack[0]) === -1) {
+          return res
+            .status(400)
+            .json(`Invalid track abbreviation: ${currTrack[0]}`);
+        }
+        if (
+          !Number.isInteger(currTrack[1]) ||
+          currTrack[1] < 1 ||
+          currTrack[1] > 12
+        ) {
+          return res
+            .status(400)
+            .json(
+              `Position for track ${currTrack[0]} is invalid; expecting an integer between 1 and 12.`
+            );
+        }
+      }
+
+      const apiKeyQuery = await sql.query(`
+        SELECT TOP (1) 
+            [ID]
+            ,[Discord_ID]
+        FROM [${dbName}].[dbo].[Players]
+        WHERE [API_Key] = '${apiKey}'`);
+
+      if (apiKeyQuery.recordset.length === 0) {
+        return res.status(400).json("No match with API Key in the database.");
+      }
+
+      const { ID, Discord_ID } = apiKeyQuery.recordset[0];
+
+      const values = trackData
+        .map(
+          (row) => `(${ID}, ${Discord_ID}, '${row[0]}', '${mode}', ${row[1]})`
+        )
+        .join(",");
+
+      await sql.query(`
+        INSERT INTO [${dbName}].[dbo].[Races] 
+	          ([PlayerID]
+            ,[Discord_ID]
+            ,[Track]
+            ,[Mode]
+            ,[Result])
+        VALUES
+	          ${values}`);
+
+      return res
+        .status(200)
+        .json(
+          `Insert Successful; view new races at https://mk8dx-race-history-tracker.com/player/${ID}`
+        );
     } catch (e) {
       console.log(e);
     }

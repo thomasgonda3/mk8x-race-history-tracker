@@ -1,10 +1,26 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 import images from "../images/track_images/index";
+import { Trash } from "react-bootstrap-icons";
 
 import * as tracks from "../json/tracks.json";
 
-const VideoMain = ({ trackData }) => {
+const rankingMap = [
+  "1st",
+  "2nd",
+  "3rd",
+  "4th",
+  "5th",
+  "6th",
+  "7th",
+  "8th",
+  "9th",
+  "10th",
+  "11th",
+  "12th",
+];
+
+const VideoMain = ({ trackData, setTrackData, trackDataRef }) => {
   return (
     <div>
       <Table className="text-center align-middle" striped bordered hover>
@@ -20,17 +36,27 @@ const VideoMain = ({ trackData }) => {
             return (
               <tr key={`table-data-${index + 1}`}>
                 <td>
+                  <Trash
+                    size={20}
+                    style={{ float: "left", cursor: "pointer" }}
+                    onClick={() => {
+                      const newTrackData = trackData.toSpliced(index, 1);
+                      setTrackData(newTrackData);
+                      trackDataRef.current = newTrackData;
+                    }}
+                  />
                   <img
                     src={images[race[0]]}
                     alt={tracks.default[race[0]].fullName}
                   ></img>
                 </td>
-                <td>{race[1] ?? "-"}</td>
+                <td className="fs-3">{rankingMap[race[1] - 1] ?? "-"}</td>
                 <td>
                   {race[2] ? (
                     <img
                       style={{ width: "auto", height: 104 }}
                       src={race[2]}
+                      alt="race-screenshot"
                     ></img>
                   ) : (
                     "-"

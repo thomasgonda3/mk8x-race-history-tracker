@@ -39,7 +39,7 @@ import dRR from "./dRR";
 import dIIO from "./dIIO";
 import dHC from "./dHC";
 import dBP from "./dBP";
-// import dCL from "./dCL";
+import dCL from "./dCL";
 import dWW from "./dWW";
 import dAC from "./dAC";
 import dNBC from "./dNBC";
@@ -76,7 +76,7 @@ import bDKS from "./bDKS";
 import bYI from "./bYI";
 import bBR from "./bBR";
 import bMC from "./bMC";
-// import bWS from "./bWS";
+import bWS from "./bWS";
 import bSSy from "./bSSy";
 import bAtD from "./bAtD";
 import bDC from "./bDC";
@@ -129,7 +129,7 @@ const u8intTracks = [
   ["dIIO", dIIO],
   ["dHC", dHC],
   ["dBP", dBP],
-  // ["dCL", dCL],
+  ["dCL", dCL],
   ["dWW", dWW],
   ["dAC", dAC],
   ["dNBC", dNBC],
@@ -166,7 +166,7 @@ const u8intTracks = [
   ["bYI", bYI],
   ["bBR", bBR],
   ["bMC", bMC],
-  // ["bWS", bWS],
+  ["bWS", bWS],
   ["bSSy", bSSy],
   ["bAtD", bAtD],
   ["bDC", bDC],

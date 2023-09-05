@@ -6,6 +6,10 @@ import newRaceResult from "./new-race-result.png";
 import insertedRace from "./inserted-race.png";
 import shorthandRace from "./shorthand-race.png";
 import deleteRace from "./delete-race.png";
+import exampleInsertion from "./example-insertion.png";
+import exampleRace from "./example-race.png";
+import expectedCaptureFeed from "./expected-capture-feed.png";
+import videoPermission from "./video-permission.png";
 
 const images = {
   botProfile,
@@ -16,6 +20,10 @@ const images = {
   insertedRace,
   shorthandRace,
   deleteRace,
+  exampleInsertion,
+  exampleRace,
+  expectedCaptureFeed,
+  videoPermission,
 };
 
 export default images;

@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "antd": "^5.8.2",
+    "body-parser": "^1.20.2",
     "bootstrap": "^5.3.1",
     "cors": "^2.8.5",
     "dayjs": "^1.11.9",
@@ -12,7 +13,9 @@
     "express": "^4.18.2",
     "image-js": "^0.35.4",
     "mssql": "^9.1.1",
-    "pixelmatch": "^5.3.0"
+    "pixelmatch": "^5.3.0",
+    "react-bootstrap-icons": "^1.10.3",
+    "react-cookie": "^6.1.0"
   },
   "devDependencies": {
     "react": "^18.2.0",
@@ -22,12 +25,11 @@
     "react-scripts": "4.0.3"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node --experimental-json-modules index.js",
     "start-client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "postbuild": "yarn install --production"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"

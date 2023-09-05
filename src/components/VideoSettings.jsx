@@ -1,12 +1,20 @@
 import React from "react";
+import Form from "react-bootstrap/Form";
 
-const VideoSettings = () => {
+const VideoSettings = ({ displayVideo, setDisplayVideo }) => {
   return (
-    <div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum quo at
-      velit enim illum quia aut reiciendis tempore alias. Quis mollitia dolor
-      consequuntur repellendus eum minus ratione autem nobis recusandae.
-    </div>
+    <Form>
+      <Form.Check
+        type="switch"
+        id="video-switch"
+        label="Show Video of Source (Video analysis will still happen if disabled)"
+        checked={displayVideo === "show"}
+        onChange={() => {
+          const newValue = displayVideo === "show" ? "hide" : "show";
+          return setDisplayVideo(newValue);
+        }}
+      />
+    </Form>
   );
 };
 
