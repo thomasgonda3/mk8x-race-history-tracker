@@ -6,7 +6,7 @@ import u8intTracks from "../u8intarrays/tracks/index.js";
 import u8intPlacements from "../u8intarrays/placements/index.js";
 import { useCookies } from "react-cookie";
 
-const SLEEP_TIME = 1.6;
+const SLEEP_TIME = 1.5;
 const PIXEL_DIFF_TRACK_THRESHOLD = 2000;
 const PIXEL_DIFF_PLACEMENT_THRESHOLD = 1337;
 
@@ -25,7 +25,7 @@ const VideoScan = ({ setTrackData, trackDataRef, displayVideo }) => {
       Image.load(URL.createObjectURL(blob)).then((image) => {
         if (
           trackDataRef.current.length === 0 ||
-          trackDataRef.current[trackDataRef.current.length - 1][1] !== null
+          trackDataRef.current[trackDataRef.current.length - 1][2] !== null
         ) {
           const rgbaImage = image
             .resize({ width: 1920, height: 1080 })
@@ -56,7 +56,9 @@ const VideoScan = ({ setTrackData, trackDataRef, displayVideo }) => {
               setTrackData([...trackDataRef.current]);
             }
           }
-        } else {
+        } else if (
+          trackDataRef.current[trackDataRef.current.length - 1][1] == null
+        ) {
           const resized = image.resize({ width: 1920, height: 1080 });
           for (let i = 0; i < 12; i++) {
             const rgbaImage = resized
@@ -79,12 +81,18 @@ const VideoScan = ({ setTrackData, trackDataRef, displayVideo }) => {
             if (output < PIXEL_DIFF_PLACEMENT_THRESHOLD) {
               console.log(`Found Position: ${i + 1}, pixelDiff: ${output}`);
               trackDataRef.current[trackDataRef.current.length - 1][1] = i + 1;
-              trackDataRef.current[trackDataRef.current.length - 1][2] =
-                image.toDataURL();
+              if (i > 6) {
+                trackDataRef.current[trackDataRef.current.length - 1][2] =
+                  image.toDataURL();
+              }
               setTrackData([...trackDataRef.current]);
               return;
             }
           }
+        } else {
+          trackDataRef.current[trackDataRef.current.length - 1][2] =
+            image.toDataURL();
+          setTrackData([...trackDataRef.current]);
         }
       });
     });

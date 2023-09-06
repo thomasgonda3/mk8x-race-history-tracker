@@ -11,6 +11,7 @@ const VideoPage = () => {
   const trackDataRef = useRef([]);
   const [trackData, setTrackData] = useState([]);
   const [displayVideo, setDisplayVideo] = useState("show");
+  const [screenshotSize, setScreenshotSize] = useState("S");
 
   return (
     <div>
@@ -25,12 +26,14 @@ const VideoPage = () => {
             trackData={trackData}
             setTrackData={setTrackData}
             trackDataRef={trackDataRef}
+            screenshotSize={screenshotSize}
           />
         </Tab>
         <Tab eventKey="settings" title="Settings">
           <VideoSettings
             displayVideo={displayVideo}
             setDisplayVideo={setDisplayVideo}
+            setScreenshotSize={setScreenshotSize}
           />
         </Tab>
         <Tab eventKey="submit" title="Submit">

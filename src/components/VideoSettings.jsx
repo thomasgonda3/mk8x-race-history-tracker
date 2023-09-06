@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Form from "react-bootstrap/Form";
+import { useCookies } from "react-cookie";
 
-const VideoSettings = ({ displayVideo, setDisplayVideo }) => {
+const VideoSettings = ({
+  displayVideo,
+  setDisplayVideo,
+  setScreenshotSize,
+}) => {
+  const [cookies, setCookie] = useCookies(["screenshotSizes"]);
+
+  useEffect(() => {
+    if (cookies.screenshotSizes != null)
+      setScreenshotSize(cookies.screenshotSizes);
+  }, []);
+
   return (
     <Form>
       <Form.Check
@@ -14,6 +26,21 @@ const VideoSettings = ({ displayVideo, setDisplayVideo }) => {
           return setDisplayVideo(newValue);
         }}
       />
+      <div className="mt-3">
+        <small className="text-secondary fst-italic">Screenshot Sizes</small>
+        <Form.Select
+          className="w-50"
+          defaultValue={cookies.screenshotSizes || "S"}
+          onChange={(e) => {
+            setCookie("screenshotSizes", e.target.value);
+            setScreenshotSize(e.target.value);
+          }}
+        >
+          <option value="S">Small</option>
+          <option value="M">Medium (320 x 180)</option>
+          <option value="L">Large (480 x 270)</option>
+        </Form.Select>
+      </div>
     </Form>
   );
 };

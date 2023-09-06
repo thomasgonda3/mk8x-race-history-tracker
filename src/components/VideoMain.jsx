@@ -20,7 +20,18 @@ const rankingMap = [
   "12th",
 ];
 
-const VideoMain = ({ trackData, setTrackData, trackDataRef }) => {
+const sizeMap = {
+  S: ["auto", 104],
+  M: [320, 180],
+  L: [480, 270],
+};
+
+const VideoMain = ({
+  trackData,
+  setTrackData,
+  trackDataRef,
+  screenshotSize,
+}) => {
   return (
     <div>
       <Table className="text-center align-middle" striped bordered hover>
@@ -54,7 +65,10 @@ const VideoMain = ({ trackData, setTrackData, trackDataRef }) => {
                 <td>
                   {race[2] ? (
                     <img
-                      style={{ width: "auto", height: 104 }}
+                      style={{
+                        width: sizeMap[screenshotSize][0],
+                        height: sizeMap[screenshotSize][1],
+                      }}
                       src={race[2]}
                       alt="race-screenshot"
                     ></img>
