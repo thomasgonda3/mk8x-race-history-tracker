@@ -40,7 +40,7 @@ const Player = () => {
         setPlayerData(player);
       } else {
         const fetchPlayers = async () => {
-          let request = `/api/players?playerID=${params.playerID}`;
+          let request = `/api/player?playerID=${params.playerID}`;
           const url = isProduction
             ? request
             : "http://localhost:8000" + request;

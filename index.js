@@ -3,6 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import sql from "mssql";
 import path from "path";
+import compression from "compression";
 import "dotenv/config";
 
 import tracks from "./src/json/tracks.json" assert { type: "json" };
@@ -34,36 +35,7 @@ const config = {
   },
 };
 
-const dirname = path.resolve();
-
-const api = async () => {
-  sql.connect(config);
-
-  const app = express();
-
-  app.use(express.static(path.join(dirname, "build")));
-
-  app.use(cors());
-  const jsonParser = bodyParser.json();
-
-  app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    next();
-  });
-
-  app.get(`/api/players`, async (req, res) => {
-    const {
-      page = 0,
-      pageAmount = 50,
-      playerName = "",
-      playerID = 0,
-    } = req.query;
-    const countString = "[Overall_Count] = COUNT(*) OVER()";
-    const patternSearch =
-      playerName === "" ? "" : `WHERE [Name] LIKE '%${playerName}%'`;
-    const IDSearch = playerID === 0 ? "" : `WHERE [ID] = ${playerID}`;
-    try {
-      const result = await sql.query(`
+const playerQuery = `
         SELECT 
             [ID]
             ,[Name]
@@ -73,24 +45,24 @@ const api = async () => {
             ,[Most_Recent_Race]
 
         FROM [${dbName}].[dbo].[Players]
-        ${patternSearch}
-        ${IDSearch}
-        ORDER BY [Most_Recent_Race] DESC
-        OFFSET ${page * pageAmount} ROWS
-        FETCH NEXT ${pageAmount} ROWS ONLY`);
-      res.json(result.recordset);
-    } catch (e) {
-      console.log(e);
-    }
-  });
+        WHERE [ID] = @ID`;
 
-  app.get(`/api/races`, async (req, res) => {
-    if (req.query == null || req.query.playerID == null) {
-      return res.status(400).send("Missing player ID");
-    }
-    const { playerID } = req.query;
-    try {
-      const result = await sql.query(`
+const playersQuery = `
+        SELECT 
+            [ID]
+            ,[Name]
+            ,[Discord_Name]
+            ,[Team]
+            ,[Race_Total]
+            ,[Most_Recent_Race]
+
+        FROM [${dbName}].[dbo].[Players]
+        WHERE [Name] LIKE @Name
+        ORDER BY [Most_Recent_Race] DESC
+        OFFSET @Rows ROWS
+        FETCH NEXT @Page_Amount ROWS ONLY`;
+
+const racesQuery = `
         SELECT 
             [${dbName}].[dbo].[Races].[ID]
             ,[Track]
@@ -102,8 +74,86 @@ const api = async () => {
         FROM [${dbName}].[dbo].[Races]
 		    JOIN [${dbName}].[dbo].[Players]
 		    ON [${dbName}].[dbo].[Races].[PlayerID] = [${dbName}].[dbo].[Players].[ID]
-        WHERE [PlayerID] = ${playerID}
-        ORDER BY [DATE] DESC`);
+        WHERE [PlayerID] = @Player_ID
+        ORDER BY [DATE] DESC`;
+
+const apiKeyQuery = `
+        SELECT TOP (1) 
+            [ID]
+            ,[Discord_ID]
+        FROM [${dbName}].[dbo].[Players]
+        WHERE [API_Key] = @API_Key`;
+
+const dirname = path.resolve();
+
+const api = async () => {
+  sql.connect(config);
+
+  const app = express();
+
+  app.use(express.static(path.join(dirname, "build")));
+
+  app.use(cors());
+  app.use(compression());
+  const jsonParser = bodyParser.json();
+
+  app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+  });
+
+  app.get(`/api/player`, async (req, res) => {
+    const { playerID = 0 } = req.query;
+    try {
+      const ps = new sql.PreparedStatement();
+      ps.input("ID", sql.Int);
+      await ps.prepare(playerQuery);
+      const result = await ps.execute({
+        ID: playerID,
+      });
+      await ps.unprepare();
+      res.json(result.recordset);
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  app.get(`/api/players`, async (req, res) => {
+    const { page = 0, pageAmount = 50, playerName = "" } = req.query;
+    console.log(playerName);
+    try {
+      const ps = new sql.PreparedStatement();
+      ps.input("Name", sql.NVarChar(50));
+      ps.input("Rows", sql.Int);
+      ps.input("Page_Amount", sql.Int);
+      await ps.prepare(playersQuery);
+      const wildcardPlayer = "%" + playerName + "%";
+      const Rows = page * pageAmount;
+      const result = await ps.execute({
+        Name: wildcardPlayer,
+        Rows,
+        Page_Amount: pageAmount,
+      });
+      await ps.unprepare();
+      res.json(result.recordset);
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  app.get(`/api/races`, async (req, res) => {
+    if (req.query == null || req.query.playerID == null) {
+      return res.status(400).send("Missing player ID");
+    }
+    const { playerID } = req.query;
+    const ps = new sql.PreparedStatement();
+    ps.input("Player_ID", sql.Int);
+    await ps.prepare(racesQuery);
+    try {
+      const result = await ps.execute({
+        Player_ID: playerID,
+      });
+      await ps.unprepare;
       res.json(result.recordset);
     } catch (e) {
       console.log(e);
@@ -155,18 +205,19 @@ const api = async () => {
         }
       }
 
-      const apiKeyQuery = await sql.query(`
-        SELECT TOP (1) 
-            [ID]
-            ,[Discord_ID]
-        FROM [${dbName}].[dbo].[Players]
-        WHERE [API_Key] = '${apiKey}'`);
+      const ps = new sql.PreparedStatement();
+      ps.input("API_Key", sql.NVarChar(50));
+      await ps.prepare(apiKeyQuery);
 
-      if (apiKeyQuery.recordset.length === 0) {
+      const result = await ps.execute({
+        API_Key: apiKey,
+      });
+
+      if (result.recordset.length === 0) {
         return res.status(400).json("No match with API Key in the database.");
       }
 
-      const { ID, Discord_ID } = apiKeyQuery.recordset[0];
+      const { ID, Discord_ID } = result.recordset[0];
 
       const values = trackData
         .map(
