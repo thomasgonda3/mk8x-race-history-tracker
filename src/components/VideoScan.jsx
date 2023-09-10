@@ -6,9 +6,16 @@ import u8intTracks from "../u8intarrays/tracks/index.js";
 import u8intPlacements from "../u8intarrays/placements/index.js";
 import { useCookies } from "react-cookie";
 
-const SLEEP_TIME = 1.5;
-const PIXEL_DIFF_TRACK_THRESHOLD = 2000;
-const PIXEL_DIFF_PLACEMENT_THRESHOLD = 1337;
+const SLEEP_TIME = process.env.REACT_APP_SLEEP_TIME;
+const PIXEL_DIFF_TRACK_THRESHOLD = process.env.REACT_APP_PIXEL_DIFF_TRACK;
+const PIXEL_DIFF_PLACEMENT_THRESHOLD =
+  process.env.REACT_APP_PIXEL_DIFF_PLACEMENT;
+const PIXEL_DIFF_PLACEMENT_EXTRA_THRESHOLD =
+  process.env.REACT_APP_PIXEL_DIFF_PLACEMENT_EXTRA;
+const PIXEL_DIFF_PLACEMENT_SENS =
+  process.env.REACT_APP_PIXEL_DIFF_PLACEMENT_SENS / 100;
+const PIXEL_DIFF_PLACEMENT_EXTRA_SENS =
+  process.env.REACT_APP_PIXEL_DIFF_PLACEMENT_EXTRA_SENS / 100;
 
 const VideoScan = ({ setTrackData, trackDataRef, displayVideo }) => {
   const [cookies, setCookie] = useCookies(["videoSource"]);
@@ -75,11 +82,65 @@ const VideoScan = ({ setTrackData, trackDataRef, displayVideo }) => {
               u8intPlacements[i],
               null,
               100,
-              62
+              62,
+              {
+                threshold: PIXEL_DIFF_PLACEMENT_SENS,
+              }
             );
 
-            if (output < PIXEL_DIFF_PLACEMENT_THRESHOLD) {
-              console.log(`Found Position: ${i + 1}, pixelDiff: ${output}`);
+            const rgbaImage2 = resized
+              .crop({
+                x: 1500,
+                y: 80 + 78 * i,
+                width: 85,
+                height: 62,
+              })
+              .rgba8();
+
+            const output2 = pixelmatch(
+              rgbaImage2.data,
+              u8intPlacements[12],
+              null,
+              85,
+              62,
+              {
+                threshold: PIXEL_DIFF_PLACEMENT_EXTRA_SENS,
+              }
+            );
+
+            const rgbaImage3 = resized
+              .crop({
+                x: 875,
+                y: 85,
+                width: 13,
+                height: 45,
+              })
+              .rgba8();
+
+            const numberCheck =
+              i === 0 ? u8intPlacements[13] : u8intPlacements[14];
+
+            const output3 = pixelmatch(
+              rgbaImage3.data,
+              numberCheck,
+              null,
+              13,
+              45,
+              {
+                threshold: PIXEL_DIFF_PLACEMENT_EXTRA_SENS,
+              }
+            );
+
+            if (
+              output < PIXEL_DIFF_PLACEMENT_THRESHOLD &&
+              output2 < PIXEL_DIFF_PLACEMENT_EXTRA_THRESHOLD &&
+              output3 < PIXEL_DIFF_PLACEMENT_EXTRA_THRESHOLD
+            ) {
+              console.log(
+                `Found Position: ${
+                  i + 1
+                }, pixelDiff: ${output}, pixelDiffExtra: ${output2}, pixelDiffPodium: ${output3}`
+              );
               trackDataRef.current[trackDataRef.current.length - 1][1] = i + 1;
               if (i > 6) {
                 trackDataRef.current[trackDataRef.current.length - 1][2] =
