@@ -30,7 +30,7 @@ const VideoSettings = ({
         <small className="text-secondary fst-italic">Screenshot Sizes</small>
         <Form.Select
           className="w-50"
-          defaultValue={cookies.screenshotSizes || "S"}
+          defaultValue={cookies.screenshotSizes || "M"}
           onChange={(e) => {
             setCookie("screenshotSizes", e.target.value);
             setScreenshotSize(e.target.value);

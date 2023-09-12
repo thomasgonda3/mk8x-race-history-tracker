@@ -11,7 +11,7 @@ const VideoPage = () => {
   const trackDataRef = useRef([]);
   const [trackData, setTrackData] = useState([]);
   const [displayVideo, setDisplayVideo] = useState("show");
-  const [screenshotSize, setScreenshotSize] = useState("S");
+  const [screenshotSize, setScreenshotSize] = useState("M");
 
   return (
     <div>

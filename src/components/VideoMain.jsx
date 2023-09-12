@@ -56,10 +56,13 @@ const VideoMain = ({
                       trackDataRef.current = newTrackData;
                     }}
                   />
-                  <img
-                    src={images[race[0]]}
-                    alt={tracks.default[race[0]].fullName}
-                  ></img>
+                  <div>
+                    <img
+                      src={images[race[0]]}
+                      alt={tracks.default[race[0]].fullName}
+                    ></img>
+                    <div>{`Race: ${index + 1}`}</div>
+                  </div>
                 </td>
                 <td className="fs-3">{rankingMap[race[1] - 1] ?? "-"}</td>
                 <td>
