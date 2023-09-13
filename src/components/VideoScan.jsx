@@ -28,8 +28,14 @@ const VideoScan = ({ setTrackData, trackDataRef, displayVideo }) => {
     const track = mediaObject.current.getVideoTracks()[0];
     const imageCapture = new ImageCapture(track);
 
-    imageCapture.takePhoto().then((blob) => {
-      Image.load(URL.createObjectURL(blob)).then((image) => {
+    imageCapture.grabFrame().then((bmp) => {
+      const canvas = document.createElement("canvas");
+      canvas.width = bmp.width;
+      canvas.height = bmp.height;
+      const ctx = canvas.getContext("bitmaprenderer");
+      ctx.transferFromImageBitmap(bmp);
+      const url = canvas.toDataURL();
+      Image.load(url).then((image) => {
         if (
           trackDataRef.current.length === 0 ||
           trackDataRef.current[trackDataRef.current.length - 1][2] !== null
@@ -142,7 +148,7 @@ const VideoScan = ({ setTrackData, trackDataRef, displayVideo }) => {
                 }, pixelDiff: ${output}, pixelDiffExtra: ${output2}, pixelDiffPodium: ${output3}`
               );
               trackDataRef.current[trackDataRef.current.length - 1][1] = i + 1;
-              if (i > 6) {
+              if (i > 7) {
                 trackDataRef.current[trackDataRef.current.length - 1][2] =
                   image.toDataURL();
               }
