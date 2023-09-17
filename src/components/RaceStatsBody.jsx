@@ -27,6 +27,17 @@ const RaceStatsBody = (props) => {
           return b.avgScore - a.avgScore || b.races - a.races;
         }),
       ]);
+    else if (sortChoice === "Weighted Score")
+      props.setRaceData([
+        ...props.raceData.sort((a, b) => {
+          if (a.weightedScore === 0) return 1;
+          return (
+            b.weightedScore - a.weightedScore ||
+            b.avgScore - a.avgScore ||
+            b.races - a.races
+          );
+        }),
+      ]);
   };
 
   return (
@@ -45,13 +56,14 @@ const RaceStatsBody = (props) => {
         <div className="col">
           <small className="text-secondary fst-italic">Race Stats Sort</small>
           <Form.Select
-            defaultValue="# of Races"
+            defaultValue="Weighted Score"
             onChange={(e) => changeSortOrder(e.target.value)}
           >
             <option value="Default Track Order">Default Track Order</option>
             <option value="# of Races"># of Races</option>
             <option value="Average Finish">Average Finish</option>
             <option value="Average Score">Average Score</option>
+            <option value="Weighted Score">Weighted Score</option>
           </Form.Select>
         </div>
       </div>

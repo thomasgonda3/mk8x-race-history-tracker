@@ -4,6 +4,7 @@ import Table from "react-bootstrap/Table";
 import RaceStatsBody from "./RaceStatsBody";
 
 import * as tracks from "../json/tracks.json";
+import * as scalar from "../json/scalar.json";
 
 const POINT_MAP = [15, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 const RACE_AVG = 6.83;
@@ -15,6 +16,7 @@ const RaceStats = (props) => {
 
   useEffect(() => {
     const tracksCopy = JSON.parse(JSON.stringify(tracks.default));
+    const scalarCopy = JSON.parse(JSON.stringify(scalar.default));
 
     let overallTrackAverage = 0;
     let overallTrackScore = 0;
@@ -22,6 +24,7 @@ const RaceStats = (props) => {
       tracksCopy[race.Track].races++;
       tracksCopy[race.Track].avgFinish += race.Result;
       tracksCopy[race.Track].avgScore += POINT_MAP[race.Result - 1];
+      tracksCopy[race.Track].raceResults.push(POINT_MAP[race.Result - 1]);
       overallTrackAverage += race.Result;
       overallTrackScore += POINT_MAP[race.Result - 1];
     }
@@ -35,22 +38,32 @@ const RaceStats = (props) => {
     );
 
     const trackMap = Object.entries(tracksCopy).map((course, index) => {
-      const avgFinish =
-        course[1].races === 0 ? 0 : course[1].avgFinish / course[1].races;
-      const avgScore =
-        course[1].races === 0 ? 0 : course[1].avgScore / course[1].races;
+      const races = course[1].races;
+      const avgFinish = course[1].races === 0 ? 0 : course[1].avgFinish / races;
+      const avgScore = course[1].races === 0 ? 0 : course[1].avgScore / races;
+      let weightedScore = -9999999;
+      if (races >= 1) {
+        const scalarIndex =
+          races > scalarCopy.length - 1 ? scalarCopy.length - 1 : races - 1;
+        const weight = scalarCopy[scalarIndex] - 0.15;
+        weightedScore = RACE_AVG + (avgScore - RACE_AVG) * weight;
+      }
       return {
         ingameOrder: index + 1,
         abr: course[0],
         fullName: course[1].fullName,
-        races: course[1].races,
+        races,
         avgFinish,
         avgScore,
+        weightedScore,
       };
     });
 
     const sortedTracks = trackMap.sort(
-      (a, b) => b.races - a.races || a.avgFinish - b.avgFinish
+      (a, b) =>
+        b.weightedScore - a.weightedScore ||
+        b.avgScore - a.avgScore ||
+        b.races - a.races
     );
 
     setRaceData(sortedTracks);
@@ -79,6 +92,7 @@ const RaceStats = (props) => {
             <th># of Races</th>
             <th>Average Finish</th>
             <th>Average Score</th>
+            <th>Weighted Score</th>
           </tr>
         </thead>
         <tbody>
@@ -106,6 +120,20 @@ const RaceStats = (props) => {
                   {race.avgScore === 0
                     ? "-"
                     : Math.round(100 * race.avgScore) / 100}
+                </td>
+                <td
+                  style={{
+                    color:
+                      race.avgScore === 0
+                        ? "black"
+                        : race.avgScore < RACE_AVG
+                        ? "red"
+                        : "green",
+                  }}
+                >
+                  {race.races < 1
+                    ? "-"
+                    : Math.round(100 * race.weightedScore) / 100}
                 </td>
               </tr>
             );

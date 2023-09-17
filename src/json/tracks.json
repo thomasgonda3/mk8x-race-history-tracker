@@ -3,528 +3,616 @@
     "fullName": "Mario Kart Stadium",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "WP": {
     "fullName": "Water Park",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "SSC": {
     "fullName": "Sweet Sweet Canyon",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "TR": {
     "fullName": "Thwomp Ruins",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "MC": {
     "fullName": "Mario Circuit",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "TH": {
     "fullName": "Toad Harbor",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "TM": {
     "fullName": "Twisted Mansion",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "SGF": {
     "fullName": "Shy Guy Falls",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "SA": {
     "fullName": "Sunshine Airport",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "DS": {
     "fullName": "Dolphin Shoals",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "Ed": {
     "fullName": "Electrodrome",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "MW": {
     "fullName": "Mount Wario",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "CC": {
     "fullName": "Cloudtop Cruise",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "BDD": {
     "fullName": "Bone-Dry Dunes",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "BC": {
     "fullName": "Bowser's Castle",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "RR": {
     "fullName": "Rainbow Road",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "rMMM": {
     "fullName": "Wii Moo Moo Meadows",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "rMC": {
     "fullName": "GBA Mario Circuit",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "rCCB": {
     "fullName": "DS Cheep Cheep Beach",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "rTT": {
     "fullName": "N64 Toad's Turnpike",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "rDDD": {
     "fullName": "GCN Dry Dry Desert",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "rDP3": {
     "fullName": "SNES Donut Plains 3",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "rRRy": {
     "fullName": "N64 Royal Raceway",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "rDKJ": {
     "fullName": "3DS DK Jungle",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "rWS": {
     "fullName": "DS Wario Stadium",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "rSL": {
     "fullName": "GCN Sherbet Land",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "rMP": {
     "fullName": "3DS Music Park",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "rYV": {
     "fullName": "N64 Yoshi Valley",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "rTTC": {
     "fullName": "DS Tick-Tock Clock",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "rPPS": {
     "fullName": "3DS Piranha Plant Slide",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "rGV": {
     "fullName": "Wii Grumble Volcano",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "rRRd": {
     "fullName": "N64 Rainbow Road",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "dYC": {
     "fullName": "GCN Yoshi Circuit",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "dEA": {
     "fullName": "Excitebike Arena",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "dDD": {
     "fullName": "Dragon Driftway",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "dMC": {
     "fullName": "Mute City",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "dWGM": {
     "fullName": "Wii Wario's Gold Mine",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "dRR": {
     "fullName": "SNES Rainbow Road",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "dIIO": {
     "fullName": "Ice Ice Outpost",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "dHC": {
     "fullName": "Hyrule Circuit",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "dBP": {
     "fullName": "GCN Baby Park",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "dCL": {
     "fullName": "GBA Cheese Land",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "dWW": {
     "fullName": "Wild Woods",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "dAC": {
     "fullName": "Animal Crossing",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "dNBC": {
     "fullName": "3DS Neo Bowser City",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "dRiR": {
     "fullName": "GBA Ribbon Road",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "dSBS": {
     "fullName": "Super Bell Subway",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "dBB": {
     "fullName": "Big Blue",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bPP": {
     "fullName": "Tour Paris Promenade",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bTC": {
     "fullName": "3DS Toad Circuit",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bCMo": {
     "fullName": "N64 Choco Mountain",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bCMa": {
     "fullName": "Wii Coconut Mall",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bTB": {
     "fullName": "Tour Tokyo Blur",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bSR": {
     "fullName": "DS Shroom Ridge",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bSG": {
     "fullName": "GBA Sky Garden",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bNH": {
     "fullName": "Tour Ninja Hideaway",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bNYM": {
     "fullName": "Tour New York Minute",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bMC3": {
     "fullName": "SNES Mario Circuit 3",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bKD": {
     "fullName": "N64 Kalimari Desert",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bWP": {
     "fullName": "DS Waluigi Pinball",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bSS": {
     "fullName": "Tour Sydney Sprint",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bSL": {
     "fullName": "GBA Snow Land",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bMG": {
     "fullName": "Wii Mushroom Gorge",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bSHS": {
     "fullName": "Sky-High Sundae",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bLL": {
     "fullName": "Tour London Loop",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bBL": {
     "fullName": "GBA Boo Lake",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bRRM": {
     "fullName": "3DS Rock Rock Mountain",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bMT": {
     "fullName": "Wii Maple Treeway",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bBB": {
     "fullName": "Tour Berlin Byways",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bPG": {
     "fullName": "DS Peach Gardens",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bMM": {
     "fullName": "Tour Merry Mountain",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bRR7": {
     "fullName": "3DS Rainbow Road",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bAD": {
     "fullName": "Tour Amsterdam Drift",    
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bRP": {
     "fullName": "GBA Riverside Park",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bDKS": {
     "fullName": "Wii DK Summit",  
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bYI": {
     "fullName": "Yoshi's Island",    
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bBR": {
     "fullName": "Tour Bangkok Rush",    
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bMC": {
     "fullName": "DS Mario Circuit",    
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bWS": {
     "fullName": "GCN Waluigi Stadium",    
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bSSy": {
     "fullName": "Tour Singapore Speedway",    
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bAtD": {
     "fullName": "Tour Athens Dash",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bDC": {
     "fullName": "GCN Daisy Cruiser",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bMH": {
     "fullName": "Wii Moonview Highway",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bSCS": {
     "fullName": "Squeaky Clean Sprint",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bLAL": {
     "fullName": "Tour Los Angeles Laps",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bSW": {
     "fullName": "GBA Sunset Wilds",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bKC": {
     "fullName": "Wii Koopa Cape",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   },
   "bVV": {
     "fullName": "Tour Vancouver Velocity",
     "races": 0,
     "avgFinish": 0,
-    "avgScore": 0
+    "avgScore": 0,
+    "raceResults": []
   }
 }
