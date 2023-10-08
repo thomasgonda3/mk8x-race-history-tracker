@@ -10,6 +10,9 @@ import exampleInsertion from "./example-insertion.png";
 import exampleRace from "./example-race.png";
 import expectedCaptureFeed from "./expected-capture-feed.png";
 import videoPermission from "./video-permission.png";
+import debugging1 from "./debugging-1.png";
+import debugging2 from "./debugging-2.png";
+import debugging3 from "./debugging-3.png";
 
 const images = {
   botProfile,
@@ -24,6 +27,9 @@ const images = {
   exampleRace,
   expectedCaptureFeed,
   videoPermission,
+  debugging1,
+  debugging2,
+  debugging3,
 };
 
 export default images;

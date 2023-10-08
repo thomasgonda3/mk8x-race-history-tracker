@@ -258,7 +258,11 @@ const VideoScan = ({ setTrackData, trackDataRef, displayVideo }) => {
       <Form.Select
         className="m-auto w-75"
         onChange={(e) => {
-          setCookie("videoSource", e.target.value);
+          const currDate = new Date();
+          currDate.setFullYear(new Date().getFullYear() + 1);
+          setCookie("videoSource", e.target.value, {
+            expires: currDate,
+          });
           return setDeviceId(e.target.value);
         }}
       >

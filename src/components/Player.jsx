@@ -10,6 +10,7 @@ import RaceStats from "./RaceStats";
 import RaceHistory from "./RaceHistory";
 import PlayerFilters from "./PlayerFilters";
 
+// const isProduction = false;
 const isProduction = process.env.REACT_APP_IS_PRODUCTION;
 
 const Player = () => {

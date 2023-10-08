@@ -168,6 +168,15 @@ const racesQuery = `
         WHERE [PlayerID] = @Player_ID
         ORDER BY [DATE] DESC`;
 
+const allRacesQuery = `
+        SELECT 
+            [PlayerID]
+            ,[Track]
+            ,[Mode]
+            ,[Result]
+        FROM [${dbName}].[dbo].[Races]
+        WHERE [Mode] = 'Mogi'`;
+
 const apiKeyQuery = `
         SELECT TOP (1) 
             [ID]
@@ -232,15 +241,68 @@ const api = async () => {
     }
   });
 
+  app.get(`/api/races/all`, async (req, res) => {
+    const MIN_RACES = 100;
+    try {
+      const result = await sql.query(allRacesQuery);
+      const totalTracks = {};
+      for (const track of tracksArray) {
+        totalTracks[track] = {
+          races: 0,
+          averageRaceProportion: 0,
+          raceProportions: [],
+        };
+      }
+      const map = {};
+      for (let i = 0; i < result.recordsets[0].length; i++) {
+        if (map[result.recordsets[0][i].PlayerID] == null) {
+          const tracks = {};
+          for (const track of tracksArray) {
+            tracks[track] = { races: 0, raceProportion: 0 };
+          }
+          map[result.recordsets[0][i].PlayerID] = {
+            tracks,
+            totalRaces: 0,
+          };
+        }
+        map[result.recordsets[0][i].PlayerID].tracks[
+          result.recordsets[0][i].Track
+        ].races++;
+        map[result.recordsets[0][i].PlayerID].totalRaces++;
+      }
+      for (const playerID in map) {
+        if (map[playerID].totalRaces >= MIN_RACES) {
+          for (const track in map[playerID].tracks) {
+            const raceProportion =
+              map[playerID].tracks[track].races / map[playerID].totalRaces;
+            map[playerID].tracks[track].raceProportion = raceProportion;
+            totalTracks[track].raceProportions.push(raceProportion);
+          }
+        }
+      }
+      for (const track in totalTracks) {
+        totalTracks[track].averageRaceProportion =
+          Math.floor(
+            100000 *
+              (totalTracks[track].raceProportions.reduce((a, b) => a + b, 0) /
+                totalTracks[track].raceProportions.length)
+          ) / 1000;
+      }
+      return res.status(200).json(totalTracks);
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
   app.get(`/api/races`, async (req, res) => {
     if (req.query == null || req.query.playerID == null) {
       return res.status(400).send("Missing player ID");
     }
-    const { playerID } = req.query;
-    const ps = new sql.PreparedStatement();
-    ps.input("Player_ID", sql.Int);
-    await ps.prepare(racesQuery);
     try {
+      const { playerID } = req.query;
+      const ps = new sql.PreparedStatement();
+      ps.input("Player_ID", sql.Int);
+      await ps.prepare(racesQuery);
       const result = await ps.execute({
         Player_ID: playerID,
       });

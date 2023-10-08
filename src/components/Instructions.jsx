@@ -52,7 +52,8 @@ const Instructions = () => {
       <p>
         After accepting, refresh the page to see a list of video sources. Your
         video source must be a complete window of the game without any
-        extraneous images on it in the standard 16:9 aspect ratio.
+        extraneous images on it in the standard 16:9 aspect ratio. Also make
+        sure that you your switch screen size is at 100%.
       </p>
       <div className="text-center m-3">
         <img src={images.expectedCaptureFeed} alt=""></img>
@@ -82,6 +83,58 @@ const Instructions = () => {
       <p>
         You can follow the link upon the successful insertion to check if your
         races updated correctly.
+      </p>
+      <h2 className="text-center m-2">Debugging</h2>
+      <p>
+        An important function used in the program to grab the current frame of
+        the video stream is not supported on all browsers. Here is a list as of
+        9/20/2023 of all supported browsers that have been tested to work for
+        video scan.
+      </p>
+      <div className="text-center m-3">
+        <img
+          style={{ width: "480px", height: "auto" }}
+          src={images.debugging1}
+          alt=""
+        ></img>
+      </div>
+      <p>
+        If the scan still doesn't work, right click the page, click the inspect
+        tab at the bottom, then go to the console tab and check if you receieve
+        an error message like the one below.
+      </p>
+      <div className="text-center m-3">
+        <img
+          style={{ width: "auto", height: "480px" }}
+          src={images.debugging2}
+          alt=""
+        ></img>
+      </div>
+      <p>
+        This error likely occurs because you are attempting to use a video
+        source in more than one location on a windows computer, which is not
+        allowed. I'm going to guess this is probably happening because you also
+        have obs open to get game audio or to stream your gameplay. You can
+        bypass this by using obs's virtual cam feature, which creates another
+        instance of the video, so you can use the scan and still have your obs
+        pick up the capture card.
+      </p>
+      <div className="text-center m-3">
+        <img
+          style={{ width: "auto", height: "480px" }}
+          src={images.debugging3}
+          alt=""
+        ></img>
+      </div>
+      <p>
+        If the scan page doesn't let you pick any option as a video source, try
+        closing obs, then refreshing your page to see a list of video sources.
+        If you pick obs virtual cam, it should save that option for whenever you
+        refresh the page.
+      </p>
+      <p>
+        If that still doesn't work, try finding me on discord and I'll give a
+        shot at debugging it.
       </p>
       <h3 className="text-center m-2">Manual Entry</h3>
       <p>

@@ -58,7 +58,15 @@ const VideoSubmit = ({ trackData, setTrackData, trackDataRef }) => {
         <div className="row">
           <div className="col">
             <small className="text-secondary fst-italic">API KEY</small>
-            <Form.Group onChange={(e) => setCookie("apiKey", e.target.value)}>
+            <Form.Group
+              onChange={(e) => {
+                const currDate = new Date();
+                currDate.setFullYear(new Date().getFullYear() + 1);
+                setCookie("apiKey", e.target.value, {
+                  expires: currDate,
+                });
+              }}
+            >
               <Form.Control defaultValue={cookies.apiKey} as="input" />
             </Form.Group>
           </div>

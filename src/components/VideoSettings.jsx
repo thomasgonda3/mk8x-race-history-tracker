@@ -32,7 +32,11 @@ const VideoSettings = ({
           className="w-50"
           defaultValue={cookies.screenshotSizes || "M"}
           onChange={(e) => {
-            setCookie("screenshotSizes", e.target.value);
+            const currDate = new Date();
+            currDate.setFullYear(new Date().getFullYear() + 1);
+            setCookie("screenshotSizes", e.target.value, {
+              expires: currDate,
+            });
             setScreenshotSize(e.target.value);
           }}
         >
