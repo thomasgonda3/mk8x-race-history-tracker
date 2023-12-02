@@ -86,6 +86,14 @@ import bLAL from "./bLAL.webp";
 import bSW from "./bSW.webp";
 import bKC from "./bKC.webp";
 import bVV from "./bVV.webp";
+import bRA from "./bRA.webp";
+import bDKM from "./bDKM.webp";
+import bDCt from "./bDCt.webp";
+import bPPC from "./bPPC.webp";
+import bMD from "./bMD.webp";
+import bRIW from "./bRIW.webp";
+import bBC3 from "./bBC3.webp";
+import bRRw from "./bRRw.webp";
 
 const images = {
   MKS,
@@ -176,6 +184,14 @@ const images = {
   bSW,
   bKC,
   bVV,
+  bRA,
+  bDKM,
+  bDCt,
+  bPPC,
+  bMD,
+  bRIW,
+  bBC3,
+  bRRw,
 };
 
 export default images;

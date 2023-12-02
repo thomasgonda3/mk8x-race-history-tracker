@@ -86,6 +86,14 @@ import bLAL from "./bLAL";
 import bSW from "./bSW";
 import bKC from "./bKC";
 import bVV from "./bVV";
+import bRA from "./bRA";
+import bDKM from "./bDKM";
+import bDCt from "./bDCt";
+import bPPC from "./bPPC";
+import bMD from "./bMD";
+import bRIW from "./bRIW";
+import bBC3 from "./bBC3";
+import bRRw from "./bRRw";
 
 const u8intTracks = [
   ["MKS", MKS],
@@ -176,6 +184,14 @@ const u8intTracks = [
   ["bSW", bSW],
   ["bKC", bKC],
   ["bVV", bVV],
+  ["bRA", bRA],
+  ["bDKM", bDKM],
+  ["bDCt", bDCt],
+  ["bPPC", bPPC],
+  ["bMD", bMD],
+  ["bRIW", bRIW],
+  ["bBC3", bBC3],
+  ["bRRw", bRRw],
 ];
 
 export default u8intTracks;

@@ -614,5 +614,61 @@
     "avgFinish": 0,
     "avgScore": 0,
     "raceResults": []
+  },
+  "bRA": {
+    "fullName": "Tour Rome Avanti",
+    "races": 0,
+    "avgFinish": 0,
+    "avgScore": 0,
+    "raceResults": []
+  },
+  "bDKM": {
+    "fullName": "GCN DK Mountain",
+    "races": 0,
+    "avgFinish": 0,
+    "avgScore": 0,
+    "raceResults": []
+  },
+  "bDCt": {
+    "fullName": "Wii Daisy Circuit",
+    "races": 0,
+    "avgFinish": 0,
+    "avgScore": 0,
+    "raceResults": []
+  },
+  "bPPC": {
+    "fullName": "Piranha Plant Cove",
+    "races": 0,
+    "avgFinish": 0,
+    "avgScore": 0,
+    "raceResults": []
+  },
+  "bMD": {
+    "fullName": "Tour Madrid Drive",
+    "races": 0,
+    "avgFinish": 0,
+    "avgScore": 0,
+    "raceResults": []
+  },
+  "bRIW": {
+    "fullName": "3DS Rosalina's Ice World",
+    "races": 0,
+    "avgFinish": 0,
+    "avgScore": 0,
+    "raceResults": []
+  },
+  "bBC3": {
+    "fullName": "SNES Bowser Castle 3",
+    "races": 0,
+    "avgFinish": 0,
+    "avgScore": 0,
+    "raceResults": []
+  },
+  "bRRw": {
+    "fullName": "Wii Rainbow Road",
+    "races": 0,
+    "avgFinish": 0,
+    "avgScore": 0,
+    "raceResults": []
   }
 }
