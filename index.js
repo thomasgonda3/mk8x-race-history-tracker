@@ -6,9 +6,6 @@ import path from "path";
 import compression from "compression";
 import "dotenv/config";
 
-// import tracks from "./src/json/tracks.json" assert { type: "json" };
-// const tracksArray = Object.keys(tracks);
-
 const tracksArray = [
   "MKS",
   "WP",
@@ -98,6 +95,14 @@ const tracksArray = [
   "bSW",
   "bKC",
   "bVV",
+  "bRA",
+  "bDKM",
+  "bDCt",
+  "bPPC",
+  "bMD",
+  "bRIW",
+  "bBC3",
+  "bRRw",
 ];
 
 const isProduction = process.env.REACT_APP_IS_PRODUCTION;
@@ -112,9 +117,10 @@ const config = {
   password: process.env.DATABASE_PASSWORD,
   database: dbName,
   server: process.env.DATABASE_SERVER,
-  timeout: 10000000,
+  connectionTimeout: 30000,
+  requestTimeout: 30000,
   pool: {
-    max: 1000,
+    max: 100,
     min: 0,
     idleTimeoutMillis: 30000,
   },
@@ -175,7 +181,17 @@ const allRacesQuery = `
             ,[Mode]
             ,[Result]
         FROM [${dbName}].[dbo].[Races]
-        WHERE [Mode] = 'Mogi'`;
+        WHERE [Mode] = @Mode`;
+
+const mixedRacesQuery = `
+        SELECT 
+            [PlayerID]
+            ,[Track]
+            ,[Mode]
+            ,[Result]
+        FROM [${dbName}].[dbo].[Races]
+        WHERE [Mode] = 'Mogi'
+        OR [Mode] = 'War'`;
 
 const apiKeyQuery = `
         SELECT TOP (1) 
@@ -187,7 +203,7 @@ const apiKeyQuery = `
 const dirname = path.resolve();
 
 const api = async () => {
-  sql.connect(config);
+  const pool = await sql.connect(config);
 
   const app = express();
 
@@ -205,7 +221,7 @@ const api = async () => {
   app.get(`/api/player`, async (req, res) => {
     const { playerID = 0 } = req.query;
     try {
-      const ps = new sql.PreparedStatement();
+      const ps = new sql.PreparedStatement(pool);
       ps.input("ID", sql.Int);
       await ps.prepare(playerQuery);
       const result = await ps.execute({
@@ -220,9 +236,8 @@ const api = async () => {
 
   app.get(`/api/players`, async (req, res) => {
     const { page = 0, pageAmount = 50, playerName = "" } = req.query;
-    console.log(playerName);
     try {
-      const ps = new sql.PreparedStatement();
+      const ps = new sql.PreparedStatement(pool);
       ps.input("Name", sql.NVarChar(50));
       ps.input("Rows", sql.Int);
       ps.input("Page_Amount", sql.Int);
@@ -243,8 +258,22 @@ const api = async () => {
 
   app.get(`/api/races/all`, async (req, res) => {
     const MIN_RACES = 100;
+    const { mode = "Mogi" } = req.query;
+    if (mode !== "Mogi" && mode !== "War" && mode !== "Mixed") {
+      return res.status(400).send("Bad Mode Type.");
+    }
     try {
-      const result = await sql.query(allRacesQuery);
+      let result;
+      if (mode !== "Mixed") {
+        const ps = new sql.PreparedStatement(pool);
+        ps.input("Mode", sql.NVarChar(50));
+        await ps.prepare(allRacesQuery);
+        result = await ps.execute({
+          Mode: mode,
+        });
+      } else {
+        result = await sql.query(mixedRacesQuery);
+      }
       const totalTracks = {};
       for (const track of tracksArray) {
         totalTracks[track] = {
@@ -300,7 +329,7 @@ const api = async () => {
     }
     try {
       const { playerID } = req.query;
-      const ps = new sql.PreparedStatement();
+      const ps = new sql.PreparedStatement(pool);
       ps.input("Player_ID", sql.Int);
       await ps.prepare(racesQuery);
       const result = await ps.execute({
@@ -358,7 +387,7 @@ const api = async () => {
         }
       }
 
-      const ps = new sql.PreparedStatement();
+      const ps = new sql.PreparedStatement(pool);
       ps.input("API_Key", sql.NVarChar(50));
       await ps.prepare(apiKeyQuery);
 
