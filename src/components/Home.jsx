@@ -37,14 +37,15 @@ const Home = () => {
         <small className="text-secondary fst-italic">Player Search</small>
         <Form.Group>
           <Form.Control
+            id="player-search"
             onChange={(e) => setPlayerName(e.target.value)}
             placeholder="Enter Name"
           ></Form.Control>
         </Form.Group>
       </Form>
-      <span className="fst-italic m-1">
+      {/* <span className="fst-italic m-1">
         {players.length > 0 ? players[0].Overall_Count : 0} results
-      </span>
+      </span> */}
       <Table className="text-center" striped bordered hover>
         <thead>
           <tr>

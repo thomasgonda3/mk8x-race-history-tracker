@@ -30,6 +30,7 @@ const PlayerFilters = ({
             }}
           >
             <RangePicker
+              id="date-range-picker"
               className="w-100 h-100"
               style={{ padding: "4px 11px 4px" }}
               value={[minDate, maxDate]}
@@ -42,6 +43,7 @@ const PlayerFilters = ({
         </div>
         <div className="col-5">
           <Form.Select
+            id="mode-filter"
             defaultValue="MogiTournamentWar"
             onChange={(e) => setMode(e.target.value)}
           >

@@ -58,6 +58,7 @@ const VideoMain = ({
                   />
                   <div>
                     <img
+                      style={{ width: "150px" }}
                       src={images[race[0]]}
                       alt={tracks.default[race[0]].fullName}
                     ></img>

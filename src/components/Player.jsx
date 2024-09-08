@@ -32,35 +32,24 @@ const Player = () => {
         method: "GET",
       });
       const result = await response.json();
-      if (result.length > 0 && result[0].Name != null) {
-        const player = {
-          name: result[0].Name,
-          discord_name: result[0].Discord_Name,
-          team: result[0].Team,
-        };
-        setPlayerData(player);
-      } else {
-        const fetchPlayers = async () => {
-          let request = `/api/player?playerID=${params.playerID}`;
-          const url = isProduction
-            ? request
-            : "http://localhost:8000" + request;
-          const response = await fetch(url, {
-            method: "GET",
-          });
-          const result = await response.json();
-          const player = {
-            name: result[0].Name,
-            discord_name: result[0].Discord_Name,
-            team: result[0].Team,
-          };
-          setPlayerData(player);
-        };
-        fetchPlayers();
-      }
       setRaces(result);
     };
+    const fetchPlayers = async () => {
+      let request = `/api/player?playerID=${params.playerID}`;
+      const url = isProduction ? request : "http://localhost:8000" + request;
+      const response = await fetch(url, {
+        method: "GET",
+      });
+      const result = await response.json();
+      const player = {
+        name: result[0].Name,
+        discord_name: result[0].Discord_Name,
+        team: result[0].Team,
+      };
+      setPlayerData(player);
+    };
     fetchRaces();
+    fetchPlayers();
   }, [params.playerID]);
 
   const filteredRaces = races.filter(

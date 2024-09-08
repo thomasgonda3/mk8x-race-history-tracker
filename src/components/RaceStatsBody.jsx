@@ -22,6 +22,7 @@ const RaceStatsBody = (props) => {
             Only last races (per track)
           </small>
           <Form.Select
+            id="last-races-filter"
             defaultValue={9999999}
             onChange={(e) => props.setLastLimit(e.target.value)}
           >
@@ -35,6 +36,7 @@ const RaceStatsBody = (props) => {
         <div className="col">
           <small className="text-secondary fst-italic">Race Stats Sort</small>
           <Form.Select
+            id="race-qualities-sort"
             defaultValue="Weighted Score"
             onChange={(e) => props.setSort(e.target.value)}
           >

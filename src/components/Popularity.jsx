@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
+import Form from "react-bootstrap/Form";
 
 // const isProduction = false;
 const isProduction = process.env.REACT_APP_IS_PRODUCTION;
@@ -93,34 +94,50 @@ const tracksMap = {
   bSW: "GBA Sunset Wilds",
   bKC: "Wii Koopa Cape",
   bVV: "Tour Vancouver Velocity",
+  bRA: "Tour Rome Avanti",
+  bDKM: "GCN DK Mountain",
+  bDCt: "Wii Daisy Circuit",
+  bPPC: "Piranha Plant Cove",
+  bMD: "Tour Madrid Drive",
+  bRIW: "3DS Rosalina's Ice World",
+  bBC3: "SNES Bowser Castle 3",
+  bRRw: "Wii Rainbow Road",
 };
 
 const Popularity = () => {
   const [popAmount, setPopAmount] = useState(0);
+  const [mode, setMode] = useState("Mogi");
   const [races, setRaces] = useState([]);
 
   useEffect(() => {
     const fetchRaces = async () => {
-      let request = `/api/races/all`;
+      let request = `/api/races/all?mode=${mode}`;
       if (!isProduction) request = "http://localhost:8000" + request;
       const response = await fetch(request, {
         method: "GET",
       });
       const result = await response.json();
-      const formattedResult = [];
-      for (const track in result) {
-        formattedResult.push([track, result[track].averageRaceProportion]);
-      }
-      setPopAmount(result.MKS.raceProportions.length);
-      setRaces(formattedResult.sort((a, b) => b[1] - a[1]));
+      setPopAmount(result.players);
+      setRaces(result.formatted_result);
     };
     fetchRaces();
-  }, []);
+  }, [mode]);
 
   return (
-    <div className="m-3 text-center">
-      <h3>Track Mogi Popularity Rankings</h3>
-      <p>{`Drawn from ${popAmount} players with minimum 100 races.`}</p>
+    <div className="m-3 text-center d-flex flex-column">
+      <h3>Track Popularity Rankings</h3>
+      <span>{`The average of the percentage each player plays a track.`}</span>
+      <span>{`Drawn from ${popAmount} players with minimum 100 ${mode} races.`}</span>
+      <Form.Select
+        id="popularity-mode-filter"
+        className="w-25 m-3 align-self-center"
+        defaultValue="Mogi"
+        onChange={(e) => setMode(e.target.value)}
+      >
+        <option value="Mogi">Mogi</option>
+        <option value="War">War</option>
+        <option value="Mixed">Mogi + War</option>
+      </Form.Select>
       <Table
         className="text-center align-middle"
         size="sm"

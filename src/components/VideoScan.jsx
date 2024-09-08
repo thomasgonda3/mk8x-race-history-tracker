@@ -256,6 +256,7 @@ const VideoScan = ({ setTrackData, trackDataRef, displayVideo }) => {
         )}
       </div>
       <Form.Select
+        id="video-source-select"
         className="m-auto w-75"
         onChange={(e) => {
           const currDate = new Date();
